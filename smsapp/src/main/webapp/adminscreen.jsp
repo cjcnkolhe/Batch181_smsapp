@@ -36,6 +36,27 @@ form {
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
+  <script type="text/javascript">
+     function fees() {
+		document.fn.action="/fees";
+		document.fn.submit();
+	}
+     function remove() {
+    	 document.fn.action="/removeStudent";
+ 		document.fn.submit();
+	}
+  
+     function batchShift() {
+    	 document.fn.action="/batchShift";
+  		document.fn.submit();
+
+	}
+  
+  
+  </script>
+
+
+
 
 </head>
 <body>
@@ -197,10 +218,28 @@ form {
 
 		<div class="view" style="height: 530px" id="view">
 			<h1>View Student</h1>
-			
+            
+             			<div class="text-center w-100">
+ <form action="search" class="w-100">
+ <select class="select form-control-sm border border-primary"
+name="batchNumber">
+ <option value="#" slected>Select Batch Number</option>
+ <option value="FDJ-181">FDJ-181</option>
+ <option value="REG-181">REG-181</option>
+
+ </select>
+ <button class="btn btn-outline-primary mb-1">Search</button> 
+ </form>
+ <marquee>
+ <h1 style="color: red;">
+ ${message }
+ </h1>
+ </marquee>
+ </div>
+ 
 				<div class="card text-center">
-					
-								<table class="table table-bordered">
+					  <form name="fn">
+						<table class="table table-bordered">
 									<thead>
 										<tr>
                                            
@@ -231,18 +270,31 @@ form {
 											<td>${s.batchNumber}</td>
 											<td>${s.batchMode}</td>
 											<td>${s.feesPaid}</td>
-										 <td><button class="btn btn-success"><a href="edit?contact=${s.studentContact}">ChangeProfile</a></button></td>
+										<td>
+<input type="radio" name="id" value="${s.studentId}">
+ </td>
+ <td>
+ <div class="btn-group btn-group-sm" role="group" aria-label="...">
+ <button class="btn btn-outline-success" onclick="fees()">Pay-Fees</button>
+ <button class="btn btn-outline-primary" onclick="batchShift()">Shift-Batch</button>
+ <button class="btn btn-outline-danger" onclick="remove()">Remove</button>
+ </div>
+ 
+ </td>
 
 										</tr>
 										
 										</c:forEach>
 									</tbody>
-								</table>
+								</table>		
+					   </form>
 							</div>
+							    
 						</div>
-		</div>
+           
+		               </div>
 
-	</div>
+
 
 </body>
 </html>

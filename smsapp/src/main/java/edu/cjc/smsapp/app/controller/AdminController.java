@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -61,6 +62,60 @@ public class AdminController {
 		return "adminscreen";
 	}
 	
+	
+	
+	@RequestMapping("/search")
+	public String getBatchStudent(@RequestParam("batchNumber") String batchNumber,Model m)
+	{
+	   
+		List<Student> result=ssi.searchBatch(batchNumber);
+		
+		m.addAttribute("data", result);
+		return "adminscreen";
+	}
+	
+	@RequestMapping("/fees")
+	public String fees(@RequestParam("id") int id,Model m) {
+		Student st=ssi.getSingleStudent(id);
+		m.addAttribute("st", st);
+		return "fees";
+	}
+	
+	@RequestMapping("/payfees")
+	public String payOnfees(@RequestParam("studentid") int id,@RequestParam("ammount") float ammount,Model m) {
+		
+		ssi.updateStudentFees(id,ammount);
+		List<Student> list=ssi.getStudents();
+		m.addAttribute("data",list);
+		return "adminscreen";
+	}
+	
+	@RequestMapping("/removeStudent")
+	public String removeStudent(@RequestParam("id") int id,Model m) {
+		 
+		ssi.removeStudent(id);
+		
+		List<Student> list=ssi.getStudents();
+		m.addAttribute("data",list);
+		return "adminscreen";
+	}
+	
+	
+	@RequestMapping("/batchShift")
+	public String batchShift(@RequestParam("id") int id,Model m) {
+		Student st=ssi.getSingleStudent(id);
+		m.addAttribute("st", st);
+		return "batch";
+	}
+	@RequestMapping("/updateBatch")
+	public String updateBatch(@RequestParam("studentid") int id,@RequestParam("batchNumber") String batchNumber,Model m) {
+		
+		ssi.updateBatchNumber(id,batchNumber);
+		
+		List<Student> list=ssi.getStudents();
+		m.addAttribute("data",list);
+		return "adminscreen";
+	}
 	
 	
 	

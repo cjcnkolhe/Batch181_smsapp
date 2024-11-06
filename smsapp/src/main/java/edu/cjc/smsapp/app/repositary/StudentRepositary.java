@@ -10,4 +10,5 @@ import edu.cjc.smsapp.app.model.Student;
 public interface StudentRepositary extends JpaRepository<Student,Integer> {
 
 	public Student findByStudentEmailAndStudentContact(String studentEmail,String studentContact);
+    public List<Student> findAllByBatchNumber(String batchNumber);
 }
