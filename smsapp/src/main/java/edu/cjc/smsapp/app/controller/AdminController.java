@@ -17,6 +17,7 @@ import edu.cjc.smsapp.app.servicei.StudentServiceI;
 @Controller
 public class AdminController {
 	int a=10;
+	int b=20;
 	@Autowired
 	StudentServiceI ssi;
 	
